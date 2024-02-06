@@ -1,16 +1,17 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { Text, View } from 'react-native'
 import React from 'react'
+
+
 
 type Props = {}
 
 const Home = (props: Props) => {
   return (
-    <View>
-      <Text>Ola Frantec</Text>
+    <View className="flex-1 pt-8">
+      <Text className="text-white text-2xl">Ola Frantec</Text>
     </View>
   )
 }
 
 export default Home
 
-const styles = StyleSheet.create({})
