@@ -9,10 +9,10 @@ import imagHeader from '../assets/logo.png'
 
 type HeaderProps = {
   title: string
-  cartQuantityItens?: number
+  cartQuantityItems?: number
 }
 
-const Header = ({title, cartQuantityItens}: HeaderProps) => {
+const Header = ({title, cartQuantityItems = 0}: HeaderProps) => {
   return (
     <View className='flex-row items-center border-b border-slate-700 pb-5 mx-5'>
      <View className='flex-1'>
@@ -20,16 +20,15 @@ const Header = ({title, cartQuantityItens}: HeaderProps) => {
       <Text className='text-white text-xl font-heading pt-2'>{title}</Text>
      </View>
 
-     {
-      cartQuantityItens && (
-        <TouchableOpacity className='relative' activeOpacity={0.7}>
-        <View className='bg-lime-300 w-4 h-4 rounded-full items-center justify-center top-2 -right-3.5 z-10'>
-           <Text className='text-slate-900 font-bold text-xs'>{cartQuantityItens}</Text>
-        </View>
-        <Feather name='shopping-bag' color={colors.white} size={24} />
+     {cartQuantityItems > 0 && (
+        <TouchableOpacity className="relative" activeOpacity={0.7}>
+          <View className="bg-lime-300 w-4 h-4 rounded-full items-center justify-center top-2 z-10 -right-3.5">
+            <Text className="text-slate-900 font-bold text-xs">{cartQuantityItems}</Text>
+          </View>
+
+          <Feather name="shopping-bag" color={colors.white} size={24} />
         </TouchableOpacity>
-      )
-     }
+      )}
     
    
     </View>
