@@ -6,7 +6,7 @@ import colors from 'tailwindcss/colors'
  const Loading = () => {
   return (
     <View className='flex-1 items-center justify-center bg-slate-900'>
-      <ActivityIndicator color={colors.white} />
+      <ActivityIndicator color={colors.white} size='large' />
     </View>
   )
 }
