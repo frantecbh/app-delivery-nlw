@@ -1,8 +1,8 @@
-import { FlatList, Text, View } from 'react-native'
+import { FlatList, SectionList, Text, View } from 'react-native'
 import React, { useState } from 'react'
 import { Header } from '@/components/header'
 import { CategoryButton } from '@/components/category-button'
-import { CATEGORIES } from '@/utils/data/products'
+import { CATEGORIES, MENU} from '@/utils/data/products'
 
 
 const Home = () => {
@@ -28,6 +28,19 @@ const Home = () => {
       contentContainerStyle={{gap: 12, paddingHorizontal: 20}}
       showsHorizontalScrollIndicator={false}
       />
+
+<SectionList 
+  sections={MENU}
+  keyExtractor={(item) => item.id}
+  stickySectionHeadersEnabled={false}
+  renderItem={({item}) => (
+    <Text className='text-white'>{item.title}</Text>  
+  )}
+  renderSectionHeader={({section: {title}}) => (
+    <Text className='text-white text-xl font-heading mt-8 mb-3'>{title}</Text>
+  )}
+/>
+      
 
     </View>
   )
