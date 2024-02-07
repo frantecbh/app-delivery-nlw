@@ -1,5 +1,5 @@
 import { FlatList, SectionList, Text, View } from 'react-native'
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { Header } from '@/components/header'
 import { CategoryButton } from '@/components/category-button'
 import { CATEGORIES, MENU} from '@/utils/data/products'
@@ -10,8 +10,21 @@ const Home = () => {
 
   const [category, setCategory] = useState(CATEGORIES[0])
 
+  const sectionListRef = useRef<SectionList>(null)
+
   function handleCategorySelect(selectedCategory: string){
     setCategory(selectedCategory)
+
+    // scroll section list
+    const sectionIndex = CATEGORIES.findIndex((category) => category === selectedCategory)
+    if(sectionListRef.current){
+      sectionListRef.current.scrollToLocation({
+        animated: true,
+        sectionIndex,
+        itemIndex: 0
+      })
+    }
+
   }
 
   return (
@@ -31,6 +44,7 @@ const Home = () => {
       />
 
 <SectionList 
+  ref={sectionListRef}
   sections={MENU}
   keyExtractor={(item) => item.id}
   stickySectionHeadersEnabled={false}
@@ -40,6 +54,9 @@ const Home = () => {
   renderSectionHeader={({section: {title}}) => (
     <Text className='text-white text-xl font-heading mt-8 mb-3'>{title}</Text>
   )}
+  showsVerticalScrollIndicator={false}
+  className='p-5 flex-1'
+  contentContainerStyle={{paddingBottom: 100}}
 />
       
 
