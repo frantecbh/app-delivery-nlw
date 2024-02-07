@@ -3,6 +3,8 @@ import React from 'react'
 import { useLocalSearchParams } from 'expo-router'
 import { PRODUCTS } from '@/utils/data/products'
 import { formatCurrency } from '@/utils/functions/format-currency'
+import { Button } from '@/components/button'
+import { Feather } from '@expo/vector-icons'
 
 type Props = {}
 
@@ -26,6 +28,18 @@ console.log(product)
           <Text key={i} className='text-slate-400 font-body text-base leading-6'>{"\u2022"} {ingredient}</Text>
         ))
       }
+     </View>
+
+     <View className='p-5 pb-8 gap-0'>
+      <Button>
+        <Button.Icon>
+          <Feather name='plus-circle' size={20} />
+        </Button.Icon>
+        <Button.Text>
+          Adicionar ao pedido
+        </Button.Text>
+      </Button>
+
      </View>
     </View>
   )
