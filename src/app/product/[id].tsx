@@ -5,6 +5,7 @@ import { PRODUCTS } from '@/utils/data/products'
 import { formatCurrency } from '@/utils/functions/format-currency'
 import { Button } from '@/components/button'
 import { Feather } from '@expo/vector-icons'
+import { LinkButton } from '@/components/link-button'
 
 type Props = {}
 
@@ -13,8 +14,6 @@ const Product = () => {
   const {id} = useLocalSearchParams()
 
 const product = PRODUCTS.filter((item) => item.id === id)[0]
-
-console.log(product)
 
   return (
     <View className='flex-1'>
@@ -39,7 +38,7 @@ console.log(product)
           Adicionar ao pedido
         </Button.Text>
       </Button>
-
+<LinkButton title='Voltar ao cardápio' href='/' />
      </View>
     </View>
   )
