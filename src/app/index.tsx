@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { Header } from '@/components/header'
 import { CategoryButton } from '@/components/category-button'
 import { CATEGORIES, MENU} from '@/utils/data/products'
+import { Product } from '@/components/product'
 
 
 const Home = () => {
@@ -34,7 +35,7 @@ const Home = () => {
   keyExtractor={(item) => item.id}
   stickySectionHeadersEnabled={false}
   renderItem={({item}) => (
-    <Text className='text-white'>{item.title}</Text>  
+    <Product data={item} />
   )}
   renderSectionHeader={({section: {title}}) => (
     <Text className='text-white text-xl font-heading mt-8 mb-3'>{title}</Text>
