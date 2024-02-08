@@ -12,7 +12,7 @@ import { LinkButton } from '@/components/link-button'
 import { useNavigation } from 'expo-router'
 import { Linking } from 'react-native'
 
-const PHONE_NUMBER = "SEU CELULAR"
+const PHONE_NUMBER = "**SEU CELULAR**"
 
 const Cart = () => {
   const cartStore = userCardStore()
