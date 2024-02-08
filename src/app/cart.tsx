@@ -1,5 +1,5 @@
 import { Alert, ScrollView, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import { Header } from '@/components/header'
 import { ProductCardProps, userCardStore } from '@/sotres/cart-store'
 import { Product } from '@/components/product'
@@ -15,6 +15,8 @@ import { LinkButton } from '@/components/link-button'
 const Cart = () => {
   const cartStore = userCardStore()
 
+  const [address, setAddress] = useState('')
+
   const total = formatCurrency(cartStore.products.reduce((total, product) => total + product.price * product.quantity, 0))
 
   const handleProductRemove = (product: ProductCardProps) => {
@@ -28,6 +30,25 @@ const Cart = () => {
         }
 
        ]) 
+  }
+
+  const handleOrder = () => {
+   if(address.trim().length === 0){
+    return Alert.alert('Pedido', "informe os dados da entrega")
+   }
+
+   const products = cartStore.products.map((product) => `\n ${product.quantity} ${product.title}`)
+   .join("")
+
+  const message = `
+  🍔 NOVO PEDIDO 🍔
+  \n Entregar em: ${address}
+  ${products}
+  \n
+  ${total}  
+  ` 
+
+  console.log(message)
   }
 
   return (
@@ -63,7 +84,7 @@ const Cart = () => {
          {total}
         </Text>
     </View>
-    <Input placeholder='Informe seu endereço de entrega ' />
+    <Input placeholder='Informe seu endereço de entrega' onChangeText={setAddress} />
           </> 
         )  }
         
@@ -73,7 +94,7 @@ const Cart = () => {
         {cartStore.products.length > 0 && (
           <>
                 <View className='p-5 gap-5'>
-          <Button>
+          <Button onPress={handleOrder}>
             <Button.Text>Enviar Pedido</Button.Text>
             <Button.Icon>
               <Feather name='arrow-right-circle' size={20} />
