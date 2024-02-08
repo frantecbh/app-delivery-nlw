@@ -53,18 +53,26 @@ const Cart = () => {
 
 
 
+        {cartStore.products.length > 0 && (
+          <>
+          
         <View className='flex-row gap-2  items-center  mt-5 mb-4'>
         
-            <Text className='text-white text-xl font-subtitle'>Total: </Text>
-            <Text className='text-lime-400 text-2xl font-heading'>
-             {total}
-            </Text>
-        </View>
-        <Input placeholder='Informe seu endereço de entrega ' />
+        <Text className='text-white text-xl font-subtitle'>Total: </Text>
+        <Text className='text-lime-400 text-2xl font-heading'>
+         {total}
+        </Text>
+    </View>
+    <Input placeholder='Informe seu endereço de entrega ' />
+          </> 
+        )  }
+        
         </View>
         </ScrollView>
         </KeyboardAwareScrollView>
-        <View className='p-5 gap-5'>
+        {cartStore.products.length > 0 && (
+          <>
+                <View className='p-5 gap-5'>
           <Button>
             <Button.Text>Enviar Pedido</Button.Text>
             <Button.Icon>
@@ -73,6 +81,9 @@ const Cart = () => {
           </Button>
           <LinkButton title='Voltar ao cardápio' href='/'/>
         </View>
+            </> 
+          )}
+  
     </View>
   )
 }
