@@ -9,11 +9,14 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { Button } from '@/components/button'
 import { Feather } from '@expo/vector-icons'
 import { LinkButton } from '@/components/link-button'
+import { useNavigation } from 'expo-router'
+import { Linking } from 'react-native'
 
-
+const PHONE_NUMBER = "SEU CELULAR"
 
 const Cart = () => {
   const cartStore = userCardStore()
+  const navigate = useNavigation()
 
   const [address, setAddress] = useState('')
 
@@ -48,7 +51,11 @@ const Cart = () => {
   ${total}  
   ` 
 
-  console.log(message)
+ Linking.openURL(`http://api.whatsapp.com/send?phone=${PHONE_NUMBER}&text=${message}`)
+
+  setAddress("")
+  cartStore.clear()
+  navigate.goBack()
   }
 
   return (
@@ -84,7 +91,14 @@ const Cart = () => {
          {total}
         </Text>
     </View>
-    <Input placeholder='Informe seu endereço de entrega' onChangeText={setAddress} />
+    <Input 
+       placeholder='Informe seu endereço de entrega' 
+       onChangeText={setAddress}
+       blurOnSubmit={true}
+       onSubmitEditing={handleOrder}
+       returnKeyType='next'
+       
+       />
           </> 
         )  }
         
