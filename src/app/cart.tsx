@@ -1,7 +1,7 @@
-import { ScrollView, StyleSheet, Text, View } from 'react-native'
+import { Alert, ScrollView, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { Header } from '@/components/header'
-import { userCardStore } from '@/sotres/cart-store'
+import { ProductCardProps, userCardStore } from '@/sotres/cart-store'
 import { Product } from '@/components/product'
 import { formatCurrency } from '@/utils/functions/format-currency'
 import { Input } from '@/components/input'
@@ -10,12 +10,25 @@ import { Button } from '@/components/button'
 import { Feather } from '@expo/vector-icons'
 import { LinkButton } from '@/components/link-button'
 
-type Props = {}
 
-const Cart = (props: Props) => {
+
+const Cart = () => {
   const cartStore = userCardStore()
 
   const total = formatCurrency(cartStore.products.reduce((total, product) => total + product.price * product.quantity, 0))
+
+  const handleProductRemove = (product: ProductCardProps) => {
+       Alert.alert("Remover Item", `Deseja remover ${product.title} do carrinho` , [
+        {
+          text: "Cancelar"
+        },
+        {
+          text: "Remover",
+          onPress: () => cartStore.remove(product.id)
+        }
+
+       ]) 
+  }
 
   return (
     <View className='flex-1 pt-8'>
@@ -30,7 +43,7 @@ const Cart = (props: Props) => {
 
       {
         cartStore.products.map((product, i) =>(
-          <Product key={i} data={product} />
+          <Product key={i} data={product} onPress={() => handleProductRemove(product)} />
 
         ))
       }     
