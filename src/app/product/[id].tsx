@@ -11,14 +11,9 @@ import { userCardStore } from '@/sotres/cart-store'
 type Props = {}
 
 const Product = () => {
-  const carStore = userCardStore()
-  
-  const navigation = useNavigation()
-  
+  const carStore = userCardStore()  
+  const navigation = useNavigation()  
   const {id} = useLocalSearchParams()  
-
-
-
 
 //const product = PRODUCTS.filter((item) => item.id === id)[0]
 const product = PRODUCTS.find((item) => item.id === id)
